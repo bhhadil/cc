@@ -63,7 +63,7 @@ main-build: cc.elf secondary-outputs $(BUILD_ARTIFACT_BIN)
 
 # Tool invocations
 cc.elf cc.map: $(OBJS) $(USER_OBJS) /var/lib/jenkins/workspace/projet/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	@if [ ! -f "/home/hadil/STM32CubeIDE/workspace_1.11.2/cc/STM32F407VGTX_FLASH.ld" ]; then \
+	@if [ ! -f "/var/lib/jenkins/workspace/projet/STM32F407VGTX_FLASH.ld" ]; then \
 		echo "Error: Linker script not found at /var/lib/jenkins/workspace/projet/STM32F407VGTX_FLASH.ld"; \
 		exit 1; \
 	fi
