@@ -63,6 +63,10 @@ main-build: cc.elf secondary-outputs $(BUILD_ARTIFACT_BIN)
 
 # Tool invocations
 cc.elf cc.map: $(OBJS) $(USER_OBJS) /home/hadil/STM32CubeIDE/workspace_1.11.2/cc/STM32F407VGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	@if [ ! -f "/home/hadil/STM32CubeIDE/workspace_1.11.2/cc/STM32F407VGTX_FLASH.ld" ]; then \
+		echo "Error: Linker script not found at /home/hadil/STM32CubeIDE/workspace_1.11.2/cc/STM32F407VGTX_FLASH.ld"; \
+		exit 1; \
+	fi
 	arm-none-eabi-gcc -o "cc.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/hadil/STM32CubeIDE/workspace_1.11.2/cc/STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="cc.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
